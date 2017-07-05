@@ -34,7 +34,7 @@ public class Author {
     Address address;
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "author")
             @Cascade(CascadeType.PERSIST)
     List<Book> books = new ArrayList<>();
 
