@@ -6,10 +6,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import javax.persistence.metamodel.EntityType;
-
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 /**
  * Created by miral on 7/4/2017.
@@ -28,12 +30,12 @@ public class Main {
         }
     }
 
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
+    public static SessionFactory getSession() throws HibernateException {
+        return ourSessionFactory;
     }
 
     public static void updateData(int id) {
-        try (Session session = getSession()) {
+        try (Session session = getSession().openSession()) {
             Author author = session.get(Author.class, id);
             author.setFirstName("pawandeep");
             author.setLastName("Singh");
@@ -46,7 +48,7 @@ public class Main {
     }
 
     public static void deleteData(int id) {
-        try (Session session = getSession()) {
+        try (Session session = getSession().openSession()) {
             Author author = session.get(Author.class, id);
 
             session.beginTransaction();
@@ -60,7 +62,7 @@ public class Main {
     public static void createData(Author author) {
 
 
-        Session session = getSession();
+        Session session = getSession().openSession();
         session.beginTransaction();
 
         session.saveOrUpdate(author);
@@ -72,7 +74,7 @@ public class Main {
 
 
     public static void queryData() {
-        final Session session = getSession();
+        final Session session = getSession().openSession();
         try {
             System.out.println("querying all the managed entities...");
             final Metamodel metamodel = session.getSessionFactory().getMetamodel();
@@ -93,13 +95,23 @@ public class Main {
 
 
     public static void main(final String[] args) throws Exception {
-        Author author = new Author("miral", "Gandhi", 23);
-        createData(author);
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+        Author author1 = new Author("miral", "Gandhi", 23);
+        author1.setDob(ft.parse("1994-06-15"));
+        Address address = new Address();
+        address.setLocation("pitampura");
+        address.setState("delhi");
+        address.setStreetNumber(42);
+        author1.setAddress(address);
+        List<String> subjects = new ArrayList<>();
+        subjects.add("angels and demon");
+        subjects.add("imperical");
+        subjects.add("Monalisa Smile");
+        author1.setSubjects(subjects);
+        createData(author1);
         queryData();
-        updateData(author.getId());
-        queryData();
-        deleteData(author.getId());
-        queryData();
+        getSession().close();
+
 
     }
 }

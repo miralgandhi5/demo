@@ -1,26 +1,72 @@
-import org.hibernate.Metamodel;
-import org.hibernate.Session;
-import org.hibernate.query.*;
-
 import javax.persistence.*;
-import javax.persistence.metamodel.EntityType;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by miral on 7/4/2017.
  */
+
 @Entity
 @Table
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
 
     Integer id;
+
     String firstName;
+    @Transient
     String lastName;
+
     int age;
+    @Temporal(TemporalType.DATE)
+
+    Date dob;
+
+    @Embedded
+    Address address;
+    @ElementCollection
+    List<String> Subjects = new ArrayList<>();
+
+    public Author() {
+    }
+
+    public Author(String firstName, String lastName, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
+    public List<String> getSubjects() {
+        return Subjects;
+    }
+
+    public void setSubjects(List<String> subjects) {
+        Subjects = subjects;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", dob=" + dob +
+                ", address=" + address +
+                ", Subjects=" + Subjects +
+                '}';
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
 
     public Integer getId() {
         return id;
@@ -54,22 +100,12 @@ public class Author {
         this.age = age;
     }
 
-    public Author() {
+    public Address getAddress() {
+        return address;
     }
 
-    public Author(String firstName, String lastName, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "Author{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                '}';
-    }
 }

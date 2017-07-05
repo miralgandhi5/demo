@@ -9,7 +9,7 @@
         <property name="hibernate.connection.url">jdbc:mysql://localhost/hibdemo</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <property name="show_sql">false</property>
 
         <!-- DB schema will be updated if needed -->
