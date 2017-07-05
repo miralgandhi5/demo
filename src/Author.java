@@ -1,4 +1,9 @@
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,25 +32,7 @@ public class Author {
 
     @Embedded
     Address address;
-    @ElementCollection
-    List<String> Subjects = new ArrayList<>();
 
-    public Author() {
-    }
-
-    public Author(String firstName, String lastName, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-    }
-
-    public List<String> getSubjects() {
-        return Subjects;
-    }
-
-    public void setSubjects(List<String> subjects) {
-        Subjects = subjects;
-    }
 
     @Override
     public String toString() {
@@ -56,9 +43,23 @@ public class Author {
                 ", age=" + age +
                 ", dob=" + dob +
                 ", address=" + address +
-                ", Subjects=" + Subjects +
+                ", books=" + books +
                 '}';
     }
+
+    @OneToMany
+            @Cascade(CascadeType.SAVE_UPDATE)
+    List<Book> books = new ArrayList<>();
+
+    public Author() {
+    }
+
+    public Author(String firstName, String lastName, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
 
     public Date getDob() {
         return dob;

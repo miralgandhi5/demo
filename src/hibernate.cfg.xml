@@ -14,5 +14,6 @@
 
         <!-- DB schema will be updated if needed -->
         <mapping class="Author"/>
+        <mapping class="Book"/>
     </session-factory>
 </hibernate-configuration>
