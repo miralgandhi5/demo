@@ -106,7 +106,7 @@ public class Main {
 
 
         Book book =new Book("Pearson");
-        author1.book=book;
+        author1.books.add(book);
         createData(author1);
         queryData();
         getSession().close();

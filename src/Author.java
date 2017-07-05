@@ -34,9 +34,9 @@ public class Author {
     Address address;
 
 
-    @OneToOne
+    @OneToMany
             @Cascade(CascadeType.ALL)
-   Book book;
+    List<Book> books = new ArrayList<>();
 
     public Author() {
     }
@@ -56,7 +56,7 @@ public class Author {
                 ", age=" + age +
                 ", dob=" + dob +
                 ", address=" + address +
-                ", book=" + book +
+                ", books=" + books +
                 '}';
     }
 
