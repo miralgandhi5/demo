@@ -35,7 +35,7 @@ public class Author {
 
 
     @OneToMany
-            @Cascade(CascadeType.ALL)
+            @Cascade(CascadeType.PERSIST)
     List<Book> books = new ArrayList<>();
 
     public Author() {

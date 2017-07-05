@@ -1,4 +1,8 @@
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
 
 /**
  * Created by miral on 7/5/2017.
@@ -10,6 +14,9 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
     String bookName;
+    @ManyToOne
+
+    Author author;
 
     public Book() {
     }
@@ -23,6 +30,7 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", bookName='" + bookName + '\'' +
+                ", author=" + author.getFirstName() +
                 '}';
     }
 

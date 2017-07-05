@@ -65,7 +65,7 @@ public class Main {
         Session session = getSession().openSession();
         session.beginTransaction();
 
-        session.saveOrUpdate(author);
+        session.persist(author);
 
         session.getTransaction().commit();
         session.close();
@@ -106,6 +106,7 @@ public class Main {
 
 
         Book book =new Book("Pearson");
+        book.author=author1;
         author1.books.add(book);
         createData(author1);
         queryData();
