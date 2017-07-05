@@ -34,22 +34,9 @@ public class Author {
     Address address;
 
 
-    @Override
-    public String toString() {
-        return "Author{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                ", dob=" + dob +
-                ", address=" + address +
-                ", books=" + books +
-                '}';
-    }
-
-    @OneToMany
-            @Cascade(CascadeType.SAVE_UPDATE)
-    List<Book> books = new ArrayList<>();
+    @OneToOne
+            @Cascade(CascadeType.ALL)
+   Book book;
 
     public Author() {
     }
@@ -60,6 +47,18 @@ public class Author {
         this.age = age;
     }
 
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", dob=" + dob +
+                ", address=" + address +
+                ", book=" + book +
+                '}';
+    }
 
     public Date getDob() {
         return dob;

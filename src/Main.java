@@ -103,12 +103,10 @@ public class Main {
         address.setState("delhi");
         address.setStreetNumber(42);
         author1.setAddress(address);
-        List<Book> books = new ArrayList<>();
-        books.add(new Book("angels and demon"));
-        books.add(new Book("imperical"));
 
-        author1.books=books;
 
+        Book book =new Book("Pearson");
+        author1.book=book;
         createData(author1);
         queryData();
         getSession().close();
